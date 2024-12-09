@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "173026775742",
+    "project_id": "biofirebasestatioeugi",
+    "storage_bucket": "biofirebasestatioeugi.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173026775742:android:b77c2c3761f75e998844ef",
+        "android_client_info": {
+          "package_name": "com.example.biofirebasestatio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAL3YpkpijZHjKhfo-kNWlrnVvS_RflrN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
