@@ -1,6 +1,5 @@
 package com.example.biofirebasestatio.screens
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -39,15 +38,10 @@ fun Authentication(
     message: String = "",
     signIn: (email: String, password: String) -> Unit = { _, _ -> },
     register: (email: String, password: String) -> Unit = { _, _ -> },
+    enableBiometric: () -> Unit = {},
+    showBiometricPrompt: (String, String) -> Unit = { _, _ -> },
     navigateToNextScreen: () -> Unit = {}
 ) {
-    // Trigger navigation only once when the user is not null
-    if (user != null) {
-        androidx.compose.runtime.LaunchedEffect(Unit) {
-            navigateToNextScreen()
-        }
-    }
-
     val emailStart = "" // TODO remove starting email
     val passwordStart = "" // TODO remove starting password
     var email by remember { mutableStateOf(emailStart) }
@@ -68,9 +62,6 @@ fun Authentication(
         }
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
-            if (user != null) {
-                Text("Welcome ${user.email ?: "unknown"}")
-            }
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = email,
@@ -132,6 +123,8 @@ fun Authentication(
                         passwordIsError = false
                     }
                     signIn(email, password)
+                    enableBiometric()
+                    showBiometricPrompt("Biometric Authentication", "Login to your account using biometrics")
                 }) {
                     Text("Sign in")
                 }
@@ -139,7 +132,6 @@ fun Authentication(
         }
     }
 }
-
 
 private fun validateEmail(email: String): Boolean {
     return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()

@@ -42,6 +42,10 @@ android {
 
 dependencies {
 
+
+    // BiometricPrompt
+    implementation ("androidx.biometric:biometric:1.1.0")
+
     implementation(libs.androidx.core.ktx)
     implementation("androidx.compose.material:material-icons-extended:<1.4.0>")
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -54,6 +58,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

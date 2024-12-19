@@ -11,6 +11,7 @@ class AuthenticationViewModel : ViewModel() {
     private val auth = FirebaseAuth.getInstance()
     var user: FirebaseUser? by mutableStateOf(auth.currentUser)
     var message by mutableStateOf("")
+    var isBiometricEnabled by mutableStateOf(false)
 
     fun signIn(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
@@ -41,5 +42,9 @@ class AuthenticationViewModel : ViewModel() {
                     message = task.exception?.message ?: "Unknown error"
                 }
             }
+    }
+
+    fun enableBiometric() {
+        isBiometricEnabled = true
     }
 }
