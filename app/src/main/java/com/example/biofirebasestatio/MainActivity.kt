@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -91,13 +90,15 @@ fun MainScreen(
                 user = authenticationViewModel.user,
                 message = authenticationViewModel.message,
                 signIn = { email, password ->
-                    authenticationViewModel.signIn(email, password)
+                    authenticationViewModel.signIn(email, password){
+                        showBiometricPrompt("Biometric Authentication", "Login to your account using biometrics")
+                    }
                     navController.navigate(NavRoutes.Welcome.route)
                 },
                 register = { email, password -> authenticationViewModel.register(email, password) },
                 enableBiometric = {
                     authenticationViewModel.enableBiometric()
-                    showBiometricPrompt("Biometric Authentication", "Login to your account using biometrics")
+//                    showBiometricPrompt("Biometric Authentication", "Login to your account using biometrics")
                 },
                 navigateToNextScreen = { navController.navigate(NavRoutes.Welcome.route) }
             )

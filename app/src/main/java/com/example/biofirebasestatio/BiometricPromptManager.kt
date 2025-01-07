@@ -6,6 +6,7 @@ import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
@@ -31,6 +32,7 @@ class BiometricPromptManager(
             .setDescription(description)
             .setAllowedAuthenticators(authenticators)
 
+
         if (Build.VERSION.SDK_INT < 30) {
             promptInfoBuilder.setNegativeButtonText("Cancel")
         }
@@ -53,6 +55,7 @@ class BiometricPromptManager(
 
         val prompt = BiometricPrompt(
             activity,
+            ContextCompat.getMainExecutor(activity),
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
